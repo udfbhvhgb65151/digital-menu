@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Menu with AR</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #f9f9f9; }
+    .menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; padding: 20px; }
+    .item { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .item h3 { margin: 10px 0; cursor: pointer; color: #ff9800; }
+    .item h3:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <h1>🍔 Digital Menu</h1>
+  <div class="menu">
+    <!-- French Fries -->
+    <div class="item">
+      <h3 onclick="openAR('fries')">French Fries</h3>
+    </div>
+
+    <!-- Burger -->
+    <div class="item">
+      <h3 onclick="openAR('burger')">Burger</h3>
+    </div>
+
+    <!-- Pizza -->
+    <div class="item">
+      <h3 onclick="openAR('pizza')">Pizza</h3>
+    </div>
+
+    <!-- Coffee -->
+    <div class="item">
+      <h3 onclick="openAR('coffee')">Coffee</h3>
+    </div>
+  </div>
+
+  <script>
+    function openAR(item) {
+      const isiPhone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      let file = isiPhone ? `${item}.usdz` : `${item}.glb`;
+      window.location.href = file;
+    }
+  </script>
+
+</body>
+</html>
