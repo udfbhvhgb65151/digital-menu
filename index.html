@@ -1,62 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AR Redirect</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Menu - AR Models</title>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
   <style>
-    body { font-family: system-ui, Arial, sans-serif; margin: 0; padding: 24px; }
-    .hidden { display:none; }
-    .btn { padding:12px 16px; border:1px solid #ccc; border-radius:8px; cursor:pointer; }
-    .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px;
+    }
+    .item {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+    model-viewer {
+      width: 100%;
+      height: 300px;
+      background: #eee;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
-  <noscript>
-    JavaScript required. Open AR manually:
-    <div class="row" style="margin-top:8px">
-      <a class="btn" rel="ar" href="https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.usdz">Open on iPhone (USDZ)</a>
-      <a class="btn" href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;">Open on Android (Scene Viewer)</a>
-    </div>
-  </noscript>
+  <h1>🍔☕🍕🐟 Digital Menu with AR</h1>
+  <p>Click the AR button to view in Augmented Reality!</p>
 
-  <div id="fallback" class="hidden">
-    <p>Agar auto-open block ho gaya ho, niche button dabao:</p>
-    <div class="row">
-      <a class="btn" id="btn-ios"  rel="ar" href="https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.usdz">Open on iPhone</a>
-      <a class="btn" id="btn-and" href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;">Open on Android</a>
+  <div class="menu-container">
+    
+    <!-- Burger -->
+    <div class="item">
+      <h2>🍔 Burger</h2>
+      <model-viewer src="https://udfbhvghgb65151.github.io/digital-menu/burger.glb" 
+                    ios-src="https://udfbhvghgb65151.github.io/digital-menu/burger.usdz" 
+                    ar 
+                    ar-modes="webxr scene-viewer quick-look" 
+                    camera-controls 
+                    auto-rotate>
+      </model-viewer>
     </div>
+
+    <!-- Coffee -->
+    <div class="item">
+      <h2>☕ Coffee</h2>
+      <model-viewer src="https://udfbhvghgb65151.github.io/digital-menu/coffee.glb" 
+                    ios-src="https://udfbhvghgb65151.github.io/digital-menu/coffee.usdz" 
+                    ar 
+                    ar-modes="webxr scene-viewer quick-look" 
+                    camera-controls 
+                    auto-rotate>
+      </model-viewer>
+    </div>
+
+    <!-- Pizza -->
+    <div class="item">
+      <h2>🍕 Pizza</h2>
+      <model-viewer src="https://udfbhvghgb65151.github.io/digital-menu/pizza.glb" 
+                    ios-src="https://udfbhvghgb65151.github.io/digital-menu/pizza.usdz" 
+                    ar 
+                    ar-modes="webxr scene-viewer quick-look" 
+                    camera-controls 
+                    auto-rotate>
+      </model-viewer>
+    </div>
+
+    <!-- Fish -->
+    <div class="item">
+      <h2>🐟 Fish</h2>
+      <model-viewer src="https://udfbhvghgb65151.github.io/digital-menu/firsnfirsh.glb" 
+                    ios-src="https://udfbhvghgb65151.github.io/digital-menu/firsnfirsh.usdz" 
+                    ar 
+                    ar-modes="webxr scene-viewer quick-look" 
+                    camera-controls 
+                    auto-rotate>
+      </model-viewer>
+    </div>
+
   </div>
-
-  <script>
-    (function () {
-      const glb  = "https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.glb";
-      const usdz = "https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.usdz";
-
-      const ua = navigator.userAgent.toLowerCase();
-      const isiOS = /iphone|ipad|ipod/.test(ua);
-      const isAndroid = /android/.test(ua);
-
-      try {
-        if (isiOS) {
-          // iPhone/iPad → Apple Quick Look (USDZ)
-          location.replace(usdz);
-          return;
-        }
-        if (isAndroid) {
-          // Android → Google Scene Viewer (AR)
-          const intent = "intent://arvr.google.com/scene-viewer/1.0?file=" +
-                         encodeURIComponent(glb) +
-                         "&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;";
-          location.replace(intent);
-          return;
-        }
-      } catch(e) {}
-
-      // Desktop/unsupported → show manual buttons
-      document.getElementById("fallback").classList.remove("hidden");
-    })();
-  </script>
 </body>
 </html>
