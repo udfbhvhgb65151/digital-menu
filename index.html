@@ -24,76 +24,50 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .item:hover {
+      transform: scale(1.05);
     }
     .item h2 {
-      margin-bottom: 15px;
-    }
-    a {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    a:hover {
-      background: #0056b3;
+      margin: 0;
     }
   </style>
+  <script>
+    function openAR(modelName) {
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      
+      if (isIOS) {
+        // iOS → Quick Look with .usdz
+        window.location.href = `https://udfbhvhgb65151.github.io/digital-menu/${modelName}.usdz`;
+      } else {
+        // Android → Scene Viewer with .glb
+        window.location.href = `intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/${modelName}.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;`;
+      }
+    }
+  </script>
 </head>
 <body>
 
-  <h1>🍽 Digital Menu - View in AR</h1>
+  <h1>🍽 Digital Menu (Tap to View in AR)</h1>
 
   <div class="menu">
 
-    <!-- Burger -->
-    <div class="item">
+    <div class="item" onclick="openAR('burger')">
       <h2>🍔 Burger</h2>
-      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/burger.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/burger.glb;end;">
-        View on Android
-      </a>
-      <br><br>
-      <a href="https://udfbhvhgb65151.github.io/digital-menu/burger.usdz">
-        View on iPhone
-      </a>
     </div>
 
-    <!-- Pizza -->
-    <div class="item">
+    <div class="item" onclick="openAR('pizza')">
       <h2>🍕 Pizza</h2>
-      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/pizza.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/pizza.glb;end;">
-        View on Android
-      </a>
-      <br><br>
-      <a href="https://udfbhvhgb65151.github.io/digital-menu/pizza.usdz">
-        View on iPhone
-      </a>
     </div>
 
-    <!-- Coffee -->
-    <div class="item">
+    <div class="item" onclick="openAR('coffee')">
       <h2>☕ Coffee</h2>
-      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/coffee.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/coffee.glb;end;">
-        View on Android
-      </a>
-      <br><br>
-      <a href="https://udfbhvhgb65151.github.io/digital-menu/coffee.usdz">
-        View on iPhone
-      </a>
     </div>
 
-    <!-- Fries -->
-    <div class="item">
+    <div class="item" onclick="openAR('fries')">
       <h2>🍟 Fries</h2>
-      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/fries.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/fries.glb;end;">
-        View on Android
-      </a>
-      <br><br>
-      <a href="https://udfbhvhgb65151.github.io/digital-menu/fries.usdz">
-        View on iPhone
-      </a>
     </div>
 
   </div>
