@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Digital Menu AR</title>
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:24px}
+    h1{margin:0 0 12px}
+    .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:16px}
+    a.btn,button.btn{padding:12px 14px;border:1px solid #ccc;border-radius:10px;text-decoration:none;display:inline-block}
+    #fallback{display:none;margin-top:16px}
+    small{color:#666}
+  </style>
+  <script>
+    // --- config ---
+    const BASE = "https://udfbhvhgb65151.github.io/digital-menu/";
+
+    const MODELS = {
+      firsnfirsh: { glb: "firsnfirsh.glb", usdz: "firsnfirsh.usdz", label: "Firsnfirsh" },
+      pizza:      { glb: "pizza.glb",      usdz: "pizza.usdz",      label: "Pizza" },
+      burger:     { glb: "burger.glb",     usdz: "burger.usdz",     label: "Burger" },
+      coffee:     { glb: "coffee.glb",     usdz: "coffee.usdz",     label: "Coffee" }
+    };
+
+    const isIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const isAndroid = () => /android/i.test(navigator.userAgent);
+
+    function buildAndroidIntent(glbUrl){
+      const encoded = encodeURIComponent(glbUrl);
+      return `intent://arvr.google.com/scene-viewer/1.0?file=${encoded}&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;`;
+    }
+
+    function openAR(key){
+      const m = MODELS[key];
+      if(!m){ alert("Model not found: " + key); return; }
+
+      if (isIOS()) {
+        // iPhone/iPad → Quick Look (USDZ)
+        location.href = BASE + m.usdz;
+      } else if (isAndroid()) {
+        // Android → Scene Viewer (GLB)
+        location.href = buildAndroidIntent(BASE + m.glb);
+      } else {
+        // Desktop/unsupported
+        document.getElementById("fallback").style.display = "block";
+        document.getElementById("iosLink").href = BASE + m.usdz;
+        document.getElementById("andLink").href = buildAndroidIntent(BASE + m.glb);
+      }
+    }
+
+    function getParamItem(){
+      const url = new URL(location.href);
+      // support both ?item=pizza and #pizza
+      const q = url.searchParams.get("item");
+      if (q) return q;
+      const h = (location.hash || "").replace(/^#/, "");
+      return h || null;
+    }
+
+    // Auto-open if an item is passed in URL
+    window.addEventListener("DOMContentLoaded", () => {
+      const item = getParamItem();
+      if (item && MODELS[item]) {
+        // try to open immediately
+        openAR(item);
+        // show a tiny fallback UI if blocked
+        setTimeout(() => {
+          if (document.visibilityState === "visible") {
+            document.getElementById("fallback").style.display = "block";
+            document.getElementById("iosLink").href  = BASE + MODELS[item].usdz;
+            document.getElementById("andLink").href  = buildAndroidIntent(BASE + MODELS[item].glb);
+          }
+        }, 800);
+      }
+    });
+  </script>
+</head>
+<body>
+  <h1>Digital Menu – Open in AR</h1>
+  <small>Tap an item. On iPhone it opens USDZ (Quick Look), on Android it opens GLB (Scene Viewer).</small>
+
+  <!-- On-page buttons (optional; useful for testing) -->
+  <div class="grid">
+    <button class="btn" onclick="openAR('firsnfirsh')">Open Firsnfirsh in AR</button>
+    <button class="btn" onclick="openAR('pizza')">Open Pizza in AR</button>
+    <button class="btn" onclick="openAR('burger')">Open Burger in AR</button>
+    <button class="btn" onclick="openAR('coffee')">Open Coffee in AR</button>
+  </div>
+
+  <!-- Fallback if auto-redirect is blocked or desktop -->
+  <div id="fallback">
+    <p>Agar auto-open block ho gaya ho, niche se manually khol lo:</p>
+    <a id="iosLink"  class="btn" rel="ar">Open on iPhone (USDZ)</a>
+    <a id="andLink"  class="btn">Open on Android (AR)</a>
+  </div>
+</body>
+</html>
