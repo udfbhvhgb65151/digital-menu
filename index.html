@@ -3,95 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Menu - AR Models</title>
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+  <title>Digital Menu AR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 0;
+      margin: 30px;
+      background: #f8f9fa;
     }
     h1 {
-      margin-top: 20px;
+      margin-bottom: 30px;
     }
-    .menu-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      margin: 20px;
     }
     .item {
       background: white;
-      padding: 15px;
+      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      width: 320px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
-    model-viewer {
-      width: 100%;
-      height: 300px;
-      background: #eee;
-      border-radius: 10px;
+    .item h2 {
+      margin-bottom: 15px;
+    }
+    a {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    a:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
-  <h1>🍔☕🍕🐟 Digital Menu with AR</h1>
-  <p>Click the AR button to view in Augmented Reality!</p>
 
-  <div class="menu-container">
-    
+  <h1>🍽 Digital Menu - View in AR</h1>
+
+  <div class="menu">
+
     <!-- Burger -->
     <div class="item">
       <h2>🍔 Burger</h2>
-      <model-viewer src="https://udfbhvhgb65151.github.io/digital-menu/burger.glb" 
-                    ios-src="https://udfbhvhgb65151.github.io/digital-menu/burger.usdz" 
-                    ar 
-                    ar-modes="webxr scene-viewer quick-look" 
-                    camera-controls 
-                    auto-rotate>
-      </model-viewer>
-    </div>
-
-    <!-- Coffee -->
-    <div class="item">
-      <h2>☕ Coffee</h2>
-      <model-viewer src="https://udfbhvhgb65151.github.io/digital-menu/coffee.glb" 
-                    ios-src="https://udfbhvhgb65151.github.io/digital-menu/coffee.usdz" 
-                    ar 
-                    ar-modes="webxr scene-viewer quick-look" 
-                    camera-controls 
-                    auto-rotate>
-      </model-viewer>
+      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/burger.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/burger.glb;end;">
+        View on Android
+      </a>
+      <br><br>
+      <a href="https://udfbhvhgb65151.github.io/digital-menu/burger.usdz">
+        View on iPhone
+      </a>
     </div>
 
     <!-- Pizza -->
     <div class="item">
       <h2>🍕 Pizza</h2>
-      <model-viewer src="https://udfbhvhgb65151.github.io/digital-menu/pizza.glb" 
-                    ios-src="https://udfbhvhgb65151.github.io/digital-menu/pizza.usdz" 
-                    ar 
-                    ar-modes="webxr scene-viewer quick-look" 
-                    camera-controls 
-                    auto-rotate>
-      </model-viewer>
+      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/pizza.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/pizza.glb;end;">
+        View on Android
+      </a>
+      <br><br>
+      <a href="https://udfbhvhgb65151.github.io/digital-menu/pizza.usdz">
+        View on iPhone
+      </a>
     </div>
 
-    <!-- Fish -->
+    <!-- Coffee -->
     <div class="item">
-      <h2>🐟 Fish</h2>
-      <model-viewer src="https://udfbhvhgb65151.github.io/digital-menu/fish.glb" 
-                    ios-src="https://udfbhvhgb65151.github.io/digital-menu/fish.usdz" 
-                    ar 
-                    ar-modes="webxr scene-viewer quick-look" 
-                    camera-controls 
-                    auto-rotate>
-      </model-viewer>
+      <h2>☕ Coffee</h2>
+      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/coffee.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/coffee.glb;end;">
+        View on Android
+      </a>
+      <br><br>
+      <a href="https://udfbhvhgb65151.github.io/digital-menu/coffee.usdz">
+        View on iPhone
+      </a>
+    </div>
+
+    <!-- Fries -->
+    <div class="item">
+      <h2>🍟 Fries</h2>
+      <a href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/fries.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://udfbhvhgb65151.github.io/digital-menu/fries.glb;end;">
+        View on Android
+      </a>
+      <br><br>
+      <a href="https://udfbhvhgb65151.github.io/digital-menu/fries.usdz">
+        View on iPhone
+      </a>
     </div>
 
   </div>
+
 </body>
 </html>
