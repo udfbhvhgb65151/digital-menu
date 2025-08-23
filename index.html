@@ -3,74 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Menu AR</title>
+  <title>Digital Menu</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin: 30px;
-      background: #f8f9fa;
+      padding: 50px;
+      background: #f5f5f5;
     }
     h1 {
       margin-bottom: 30px;
     }
     .menu {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
+      max-width: 400px;
+      margin: 0 auto;
     }
-    .item {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      transition: transform 0.2s;
+      background: #ff5722;
+      color: white;
+      transition: 0.3s;
     }
-    .item:hover {
-      transform: scale(1.05);
-    }
-    .item h2 {
-      margin: 0;
+    button:hover {
+      background: #e64a19;
     }
   </style>
+</head>
+<body>
+  <h1>🍴 Digital Menu</h1>
+  <div class="menu">
+    <button onclick="openAR('pizza')">🍕 Pizza</button>
+    <button onclick="openAR('burger')">🍔 Burger</button>
+    <button onclick="openAR('coffee')">☕ Coffee</button>
+    <button onclick="openAR('fries')">🐟 Fries</button>
+  </div>
+
   <script>
-    function openAR(modelName) {
+    function openAR(item) {
       const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      
+      let glbURL = "";
+      let usdzURL = "";
+
+      // 🔗 Replace with your GitHub/Hosting file paths
+      if (item === "pizza") {
+        glbURL = "https://udfbhvhgb65151.github.io/digital-menu/pizza.glb";
+        usdzURL = "https://udfbhvhgb65151.github.io/digital-menu/pizza.usdz";
+      } else if (item === "burger") {
+        glbURL = "https://udfbhvhgb65151.github.io/digital-menu/burger.glb";
+        usdzURL = "https://udfbhvhgb65151.github.io/digital-menu/burger.usdz";
+      } else if (item === "coffee") {
+        glbURL = "https://udfbhvhgb65151.github.io/digital-menu/coffee.glb";
+        usdzURL = "https://udfbhvhgb65151.github.io/digital-menu/coffee.usdz";
+      } else if (item === "fish") {
+        glbURL = "https://udfbhvhgb65151.github.io/digital-menu/firsnfirsh.glb";
+        usdzURL = "https://udfbhvhgb65151.github.io/digital-menu/firsnfirsh.usdz";
+      }
+
       if (isIOS) {
-        // iOS → Quick Look with .usdz
-        window.location.href = `https://udfbhvhgb65151.github.io/digital-menu/${modelName}.usdz`;
+        // 📱 iPhone/iPad (AR Quick Look)
+        window.location.href = usdzURL;
       } else {
-        // Android → Scene Viewer with .glb
-        window.location.href = `intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/digital-menu/${modelName}.glb#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;`;
+        // 🤖 Android (Scene Viewer)
+        window.location.href =
+          "intent://arvr.google.com/scene-viewer/1.0?file=" +
+          glbURL +
+          "#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;";
       }
     }
   </script>
-</head>
-<body>
-
-  <h1>🍽 Digital Menu (Tap to View in AR)</h1>
-
-  <div class="menu">
-
-    <div class="item" onclick="openAR('burger')">
-      <h2>🍔 Burger</h2>
-    </div>
-
-    <div class="item" onclick="openAR('pizza')">
-      <h2>🍕 Pizza</h2>
-    </div>
-
-    <div class="item" onclick="openAR('coffee')">
-      <h2>☕ Coffee</h2>
-    </div>
-
-    <div class="item" onclick="openAR('fries')">
-      <h2>🍟 Fries</h2>
-    </div>
-
-  </div>
-
 </body>
 </html>
