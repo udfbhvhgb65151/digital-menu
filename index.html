@@ -6,55 +6,33 @@
   <title>AR Redirect</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <style>
-    body { font-family: system-ui, Arial, sans-serif; margin: 0; padding: 24px; background:#f9f9f9; text-align:center; }
-    h1 { margin-bottom:20px; }
+    body { font-family: system-ui, Arial, sans-serif; margin: 0; padding: 24px; }
     .hidden { display:none; }
-    .btn { 
-      padding:12px 18px; 
-      border:1px solid #ccc; 
-      border-radius:8px; 
-      cursor:pointer; 
-      background:#fff; 
-      text-decoration:none; 
-      color:#333; 
-      font-weight:600;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    .btn:hover { background:#f0f0f0; }
-    .row { display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; margin-top:20px; }
+    .btn { padding:12px 16px; border:1px solid #ccc; border-radius:8px; cursor:pointer; }
+    .row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   </style>
 </head>
 <body>
-  <h1>🍕 AR Food Viewer</h1>
-
   <noscript>
-    <p>JavaScript required. Open AR manually:</p>
-    <div class="row">
+    JavaScript required. Open AR manually:
+    <div class="row" style="margin-top:8px">
       <a class="btn" rel="ar" href="https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.usdz">Open on iPhone (USDZ)</a>
       <a class="btn" href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;">Open on Android (Scene Viewer)</a>
     </div>
   </noscript>
 
   <div id="fallback" class="hidden">
-    <p>⚠️ Auto open failed. Use the button below:</p>
+    <p>Agar auto-open block ho gaya ho, niche button dabao:</p>
     <div class="row">
-      <a class="btn" id="btn-ios" rel="ar" href="#">Open on iPhone</a>
-      <a class="btn" id="btn-and" href="#">Open on Android</a>
+      <a class="btn" id="btn-ios"  rel="ar" href="https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.usdz">Open on iPhone</a>
+      <a class="btn" id="btn-and" href="intent://arvr.google.com/scene-viewer/1.0?file=https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;">Open on Android</a>
     </div>
   </div>
 
   <script>
     (function () {
-      // 👉 Replace these with your model links
       const glb  = "https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.glb";
       const usdz = "https://udfbhvhgb65151.github.io/AR-MODEL/firsnfirsh.usdz";
-
-      // Buttons for manual fallback
-      document.getElementById("btn-ios").href = usdz;
-      document.getElementById("btn-and").href =
-        "intent://arvr.google.com/scene-viewer/1.0?file=" +
-        encodeURIComponent(glb) +
-        "&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;";
 
       const ua = navigator.userAgent.toLowerCase();
       const isiOS = /iphone|ipad|ipod/.test(ua);
@@ -62,12 +40,12 @@
 
       try {
         if (isiOS) {
-          // iPhone → Quick Look (USDZ)
+          // iPhone/iPad → Apple Quick Look (USDZ)
           location.replace(usdz);
           return;
         }
         if (isAndroid) {
-          // Android → Google Scene Viewer (GLB)
+          // Android → Google Scene Viewer (AR)
           const intent = "intent://arvr.google.com/scene-viewer/1.0?file=" +
                          encodeURIComponent(glb) +
                          "&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;end;";
@@ -76,7 +54,7 @@
         }
       } catch(e) {}
 
-      // Desktop/unsupported → show fallback buttons
+      // Desktop/unsupported → show manual buttons
       document.getElementById("fallback").classList.remove("hidden");
     })();
   </script>
